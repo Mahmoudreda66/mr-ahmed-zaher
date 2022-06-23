@@ -1,0 +1,38 @@
+body{
+	background-color: var(--bs-light);
+    font-weight: 300;
+    direction: rtl;
+}
+
+nav.navbar{
+	font-weight: 500;
+}
+
+html{scroll-behavior: smooth;}
+
+.form-control{
+	box-shadow: none !important;
+}
+
+table.table td{
+	padding: 12px 8px;
+	vertical-align: middle;
+    border-color: #ddd;
+    border-top: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.table.table-hover tr:hover {
+    background-color: #f5f5f5;
+}
+
+.table.table-hover thead tr:hover {
+    background-color: #0000;
+}
+
+.table thead th{
+	font-weight: 500;
+}
+
+h6 strong{
+	font-size: 14px;
+}

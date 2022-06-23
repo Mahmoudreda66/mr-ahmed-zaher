@@ -1,0 +1,383 @@
+body {
+    overflow-x: hidden !important;
+}
+
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.h1,
+.h2,
+.h3,
+.h4 {
+  font-family: "Cairo";
+}
+
+button[disabled]{
+    cursor: not-allowed;
+}
+
+.pay-exp{
+    user-select: none;
+}
+
+html{
+    scroll-behavior: smooth;
+}
+
+.sidebar .custom-logo{
+    position: relative;
+    z-index: 4;
+    overflow: hidden;
+    margin: 16px 16px 0px;
+}
+
+.sidebar .custom-logo .logo-container{
+    width: 54px;
+}
+
+.sidebar .custom-logo img:first-of-type{
+    width: 100%;
+    height: 100%;
+}
+
+.sidebar .custom-logo .user-info{
+    margin-right: 10px;
+    font-size: 15px;
+    position: relative;
+    top: 6px;
+}
+
+.sidebar .custom-logo .user-info .user-role{
+    font-size: 11px;
+    position: relative;
+    top: -4px;
+}
+
+.main-panel {
+    overflow-x: hidden !important;
+}
+
+.student-token{
+    cursor: pointer;
+    user-select: none;
+}
+
+tr.active{
+    background-color: #f5f5f5;
+}
+
+.sidebar-wrapper::-webkit-scrollbar-thumb,
+body::-webkit-scrollbar-thumb {
+  background-color: #ccc;
+  border-radius: 5px;
+}
+
+.sidebar-wrapper::-webkit-scrollbar, body::-webkit-scrollbar {
+  width: 6px;
+}
+
+.badge{
+    white-space: normal;
+    line-height: 1.4;
+}
+
+.btn{
+    will-change: auto;
+}
+
+.dir-rtl{
+    direction: rtl;
+}
+
+.dir-ltr{
+    direction: ltr;
+}
+
+a.table.btn{
+    box-shadow: none;
+}
+
+a.table.btn i.fa-info{
+    font-size: 14px;
+}
+
+.dropup
+.dropdown-toggle::after{
+    display: none;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type=number] {
+    -moz-appearance:textfield;
+}
+
+select.form-control:not([size]):not([multiple]) {
+    height: 36px;
+}
+
+.cursor-pointer{
+    cursor: pointer;
+}
+
+.cursor-ban{
+    cursor: not-allowed;
+}
+
+h2.exam-title {
+    font-weight: bold;
+    font-size: 16px;
+    padding: 9px 0px;
+    margin-bottom: 5px;
+}
+
+.exam-question-c{
+    font-size: 13px;
+    font-weight: bold;
+}
+
+.close-btn-in-input{
+    position: absolute;
+    left: 10px;
+    top: 15px;
+    cursor: pointer;
+}
+
+.list-style-square{
+    list-style: square;
+}
+
+label {
+    color: inherit;
+}
+
+.as-a{
+    color: #0070ff;
+    cursor: pointer;
+}
+
+.d-none-light {
+    display: none;
+}
+
+select.form-control[disabled], input.form-control[disabled], textarea.form-control[disabled] {
+    background-color: #d2d2d2 !important;
+}
+
+.options-cog-btn{
+    position: absolute;
+    left: 25px;
+    color: #fff;
+    z-index: 9999;
+    background: #fff;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    transition: .2s;
+    box-shadow: 0px 0px 28px -13px #2858b5;
+}
+.options-cog-btn button:first-of-type{
+    background: #0000 !important;
+    font-size: 22px;
+    box-shadow: none !important;
+}
+
+html[dir="rtl"] .dropdown-toggle::after {
+    margin-right: 0em;
+    margin-left: 0;
+}
+
+.dropdown-toggle::after {
+    display: none;
+}
+
+.students-absence-loader{
+    width: 100%;
+    height: 300px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.students-absence-loader span{
+    border-radius: 50%;
+    background: #50cc69;
+    animation: absence-loader .4s infinite linear;
+    animation-direction: alternate;
+    border: 2px solid #50cc69;
+}
+
+@keyframes absence-loader{
+    from{
+        transform: rotateY(0deg);
+        width: 40px;
+        height: 40px;
+    }
+    to{
+        transform: rotateY(140deg);
+        width: 45px;
+        height: 45px;
+    }
+}
+
+.allpage-loader{
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    z-index: 99999999;
+    background-color: #ffffffd1;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    left: 0px;
+    display: none;
+    justify-content: center;
+    align-items: center;
+}
+
+.allpage-loader span{
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: #50cc69;
+    animation: absence-loader .4s infinite linear;
+    animation-direction: alternate;
+}
+
+option.t-opt-s[disabled] {
+    display: none;
+}
+
+.question{
+    cursor: default;
+}
+
+.parent-section i{
+    font-size: 14px;
+    padding: 0px 3px;
+    cursor: pointer;
+}
+
+.parent-section i.fa-trash{
+    padding: 0px 3px;
+}
+
+.parent-section .options-container{
+    margin-right: 8px;
+    display: none;
+}
+
+.parent-section:hover .options-container{
+    display: block;
+}
+
+ul.search-hints{
+    position: absolute;
+    background: whitesmoke;
+    width: 100%;
+    border-bottom-right-radius: 11px;
+    border-bottom-left-radius: 11px;
+    margin-bottom: 0px;
+    z-index: 1;
+    list-style: none;
+    padding-right: 0px;
+    box-shadow: 0px 6px 4px 0px #00000014;
+}
+
+ul.search-hints li{
+    cursor: pointer;
+    padding: 9px 16px 9px 0px;
+    border-bottom: 1px solid #eee;
+}
+
+ul.search-hints li:hover{
+    background-color: #efeeee;
+}
+
+.answer-box, .answer-box p,
+.answer-box ul{
+    font-size: 15px;
+    margin-bottom: 0px;
+}
+
+.correcting .sho-bb-0{
+    position: relative;
+}
+
+.correcting .options-container{
+    z-index: 20;
+    display: none;
+}
+
+.dropdown-item.active, .dropdown-item:active {
+    color: #ffffff !important;
+    text-decoration: none;
+    background-color: #2196f3;
+}
+
+.corrected-question::after{
+    content: "تم التصحيح";
+    padding: 0px 10px;
+    border-radius: 4px;
+    font-weight: 500;
+    font-size: 11px;
+}
+
+.corrected-question .answer-box{
+    margin-bottom: 8px;
+}
+
+.corrected-question.correct::after{
+    background: #93cc55;
+    color: #fff;
+}
+
+.corrected-question.wrong::after{
+    background: #e46e6e;
+    color: #fff;
+}
+
+.r-true-q::after{
+    content: "الإجابة";
+    color: #fbfbfb;
+    background-color: cornflowerblue;
+    padding: 0px 10px;
+    border-radius: 3px;
+    font-size: 11px;
+}
+
+.exam-box-active{
+    transition: .3s;
+    background: cornflowerblue !important;
+    color: #fff !important;
+}
+
+table.text-center th{
+    text-align: center !important;
+}
+
+.user-select-none{
+    user-select: none;
+}
+
+.correct-t_f{
+    background-color: #ebebebb8;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+}

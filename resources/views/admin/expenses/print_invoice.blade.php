@@ -30,7 +30,7 @@
 		<div class="row">
 			<div class="mx-auto bg-white col-12 p-3">
 				<div class="text-center brand-name fw-bold mb-3">
-					{{ cache()->get('app_name', 'سمارت سنتر') }}
+					<img src="/{{ \App\Models\Admin\Settings::where('name', 'center_logo')->first()['value'] }}" width="180px">
 				</div>
 				<div>
 					<div class="invoice-info">

@@ -2,4 +2,4 @@
 
 use Illuminate\Support\Facades\Route;
 
-Route::redirect("", "/parents");
+Route::redirect("", "/videos");

@@ -12,8 +12,10 @@ use App\Models\Admin\Settings;
 use App\Models\Admin\StudentTeachers;
 use App\Models\Exams\ExamsEnterAttemps;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Validator;
 use App\DataTables\StudentDataTable;
+use App\DataTables\StudentsConfirmationDataTable;
 
 class StudentController extends Controller
 {
@@ -30,6 +32,7 @@ class StudentController extends Controller
         $this->middleware('permission:edit-student')->only(['edit', 'update']);
         $this->middleware('permission:filled-absence-list')->only(['filled_absence_list', 'fill_absence_list']);
         $this->middleware('permission:print-barcodes')->only('print_barcodes');
+        $this->middleware('permission:students-application-list')->only('confirm_application');
     }
 
     /**
@@ -107,6 +110,12 @@ class StudentController extends Controller
             $code = rand(10, 99) . rand(10, 99) . rand(10, 99) . rand(10, 99);
         } while ($exists);
 
+        $deleted_at = null;
+
+        if($request->has('confirm')){
+            $deleted_at = now()->timestamp;
+        }
+
         if (in_array($request->level, $preps)) { // prepratory student
             if ($students_must_choose_teachers) {
                 $subjects = Subject::where('level', 0)->orWhere('level', 2)->get();
@@ -137,7 +146,8 @@ class StudentController extends Controller
                 'division' => null,
                 'sub_language' => null,
                 'edu_type' => $request->edu_type,
-                'user_id' => auth()->user()->id
+                'user_id' => auth()->user()->id,
+                'deleted_at' => $deleted_at
             ]);
 
             if ($students_must_choose_teachers) {
@@ -208,7 +218,8 @@ class StudentController extends Controller
                 'division' => $request->division,
                 'sub_language' => $request->sub_language,
                 'edu_type' => $request->edu_type,
-                'user_id' => auth()->user()->id
+                'user_id' => auth()->user()->id,
+                'deleted_at' => $deleted_at
             ]);
 
             if ($students_must_choose_teachers) {
@@ -221,9 +232,19 @@ class StudentController extends Controller
 
         if($request->has('back_to')){
             if($request->back_to === "parents"){
+
                 auth()->guard('parents')->login($student);
 
                 return redirect()->to(route('parents.home'))->with('success', 'تم حفظ البيانات بنجاح');
+
+            }else if($request->back_to === "students_application"){
+
+                return redirect()->to(route('studentsApplication.home'))->with([
+                    'success' => 'true',
+                    'open_modal' => true,
+                    'student_code' => $student->code
+                ]);
+
             }
         }else{
             $print_after_add_student = Settings::where('name', 'print_after_add_student')->select('value')->first()['value'];
@@ -453,11 +474,20 @@ class StudentController extends Controller
      */
     public function destroy(Request $request)
     {
-        $student = Student::findOrFail($request->id);
+        $student = Student::withTrashed()->findOrFail($request->id);
         Expenses::where('student_id', $student->id)->forceDelete();
 
-        $student->delete();
-        return redirect()->to(route('students.index'))->with(['success' => 'تم حذف الطالب بنجاح']);
+        $student->forceDelete();
+        
+        if($request->has('redirect_to')){
+
+            if($request->redirect_to === 'students_confirmation'){
+                return redirect()->to(route('confirm_application'))->with(['success' => 'تم حذف الطالب بنجاح']);
+            }
+
+        }else{
+            return redirect()->to(route('students.index'))->with(['success' => 'تم حذف الطالب بنجاح']);
+        }
     }
 
     public function print($id)
@@ -489,7 +519,8 @@ class StudentController extends Controller
         $level = Level::findOrFail($request->level);
 
         $students = Student::where('level_id', $level->id)
-        ->orderBy('division', 'DESC')
+        ->orderBy('edu_type', 'DESC')
+        ->orderBy('division', 'ASC')
         ->get();
 
         return view('admin.students.absence-list')->with(['students' => $students, 'level' => $level->name_ar]);
@@ -590,7 +621,8 @@ class StudentController extends Controller
 
             $students = Student::where('level_id', $levelData->id)
             ->with('absence_list', 'expenses')
-            ->orderBy('division', 'DESC')
+            ->orderBy('edu_type', 'DESC')
+            ->orderBy('division', 'ASC')
             ->select('id', 'name', 'division', 'edu_type')
             ->get();
 
@@ -641,5 +673,19 @@ class StudentController extends Controller
         }else{
             return view('admin.students.filled-absence-list', compact('levels')); 
         }
+    }
+
+    public function confirm_application(StudentsConfirmationDataTable $table)
+    {
+        return $table->render('admin.students.confirm_application');
+    }
+
+    public function update_confirm_application($id)
+    {
+        $student = Student::withTrashed()->findOrFail($id);
+
+        $student->restore();
+
+        return redirect()->back()->with(['success' => 'تم إضافة الطالب بنجاح']);
     }
 }

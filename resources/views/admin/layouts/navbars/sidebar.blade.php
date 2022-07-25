@@ -48,7 +48,7 @@
             </li>
             @endif
             @if(auth()->user()->hasPermission('students'))
-            <li class="nav-item {{ ($activePage == 'students.index' || $activePage == 'students.create' || $activePage == 'filled_absence_list') ? ' active' : '' }}">
+            <li class="nav-item {{ ($activePage == 'students.index' || $activePage == 'students.create' || $activePage == 'filled_absence_list' || $activePage == 'students.confirmation') ? ' active' : '' }}">
                 <a class="nav-link" data-toggle="collapse" href="#studentsLinks" aria-expanded="false">
                     <i class="fas fa-users" style="font-size: 17px;"></i>
                     <p>الطلاب</p>
@@ -76,6 +76,13 @@
                             </a>
                         </li>
                         @endif
+                        @if(auth()->user()->hasPermission('students-application-list'))
+                        <li class="nav-item {{ $activePage == 'students.confirmation' ? ' active' : '' }}">
+                            <a class="nav-link" id="print-students-list" href="{{ route('confirm_application') }}">
+                                <span class="sidebar-normal">تأكيد حجز الطلاب</span>
+                            </a>
+                        </li>
+                        @endif
                         @if(auth()->user()->hasPermission('students-absence-list'))
                         <li class="nav-item {{ $activePage == '' ? ' active' : '' }}">
                             <a class="nav-link" id="print-absence-list" href="javascript:void(0)" data-route="{{ route('absences.list') }}">
@@ -94,6 +101,32 @@
                         <li class="nav-item {{ $activePage == 'filled_absence_list' ? 'active' : '' }}">
                             <a class="nav-link" href="javascript:void(0)" id="filled-absence-list" data-route="{{ route('filled_absence_list') }}">
                                 <span class="sidebar-normal">طباعة كشف غياب مملوء</span>
+                            </a>
+                        </li>
+                        @endif
+                    </ul>
+                </div>
+            </li>
+            @endif
+            @if(auth()->user()->hasPermission('videos'))
+            <li class="nav-item {{ ($activePage == 'videos.index' || $activePage == 'videos.create') ? ' active' : '' }}">
+                <a class="nav-link" data-toggle="collapse" href="#videosLinks" aria-expanded="false">
+                    <i class="fas fa-play" style="font-size: 17px;"></i>
+                    <p>الفيديوهات</p>
+                </a>
+                <div class="collapse" id="videosLinks">
+                    <ul class="nav">
+                        @if(auth()->user()->hasPermission('videos'))
+                        <li class="nav-item {{ $activePage == 'videos.index' ? ' active' : '' }}">
+                            <a class="nav-link" href="{{ route('videos-management.index') }}">
+                                <span class="sidebar-normal">قائمة الفيديوهات</span>
+                            </a>
+                        </li>
+                        @endif
+                        @if(auth()->user()->hasPermission('add-video'))
+                        <li class="nav-item {{ $activePage == 'videos.create' ? ' active' : '' }}">
+                            <a class="nav-link" href="{{ route('videos-management.create') }}">
+                                <span class="sidebar-normal">إضافة فيديو</span>
                             </a>
                         </li>
                         @endif
@@ -187,7 +220,7 @@
             </li>
             @endif
             @if(auth()->user()->hasPermission('exams'))
-            <li class="nav-item {{ ($activePage == 'exams.index' || $activePage == 'exams.create') || $activePage == 'exams.attemps' || $activePage == 'exams.marks' || $activePage == 'exams.manual-marks' || $activePage == 'exams.correcting' ? ' active' : '' }}">
+            <li class="nav-item {{ ($activePage == 'exams.index' || $activePage == 'exams.create') || $activePage == 'exams.attemps' || $activePage == 'exams.marks' || $activePage == 'exams.manual-marks' || $activePage == 'exams.correcting' || $activePage == 'math-equations' ? ' active' : '' }}">
                 <a class="nav-link" data-toggle="collapse" href="#examsLinks" aria-expanded="false">
                     <i class="fas fa-file" style="font-size: 17px;"></i>
                     <p>الإختبارات</p>
@@ -240,6 +273,11 @@
                             </a>
                         </li>
                         @endif
+                        <li class="nav-item {{ $activePage == 'math-equations' ? ' active' : '' }}">
+                            <a class="nav-link" href="{{ route('math-equations') }}">
+                                <span class="sidebar-normal">الرموز الرياضية</span>
+                            </a>
+                        </li>
                     </ul>
                 </div>
             </li>
@@ -380,6 +418,11 @@
                         <li class="nav-item">
                             <a class="nav-link" target="_blank" href="{{ route('studentsApplication.home') }}">
                                 <span class="sidebar-normal">واجهة تقديم الطلاب</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" target="_blank" href="{{ route('videos.index') }}">
+                                <span class="sidebar-normal">واجهة الفيديوهات</span>
                             </a>
                         </li>
                     </ul>

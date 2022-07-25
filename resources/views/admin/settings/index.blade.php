@@ -89,6 +89,15 @@ function getLevelName($name)
 	    	<div class="row">
 	    		<div class="col-md-4 col-sm-6 col-12 mb-3">
 	    			<input
+	    			type="checkbox" name="must_confirm_students_application"
+	    			id="must_confirm_students_application" value="1"
+	    			{{ getSettings('must_confirm_students_application') == 1 ? 'checked' : '' }}>
+	    			<label for="must_confirm_students_application">
+	    				تأكيد الحجز أولاً بعد التقديم الإلكتروني
+	    			</label>
+	    		</div>
+	    		<div class="col-md-4 col-sm-6 col-12 mb-3">
+	    			<input
 	    			type="checkbox" name="show_answers_after_exam_ends"
 	    			id="show_answers_after_exam_ends" value="1"
 	    			{{ getSettings('show_answers_after_exam_ends') == 1 ? 'checked' : '' }}>

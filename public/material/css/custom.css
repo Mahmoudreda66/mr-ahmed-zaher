@@ -381,3 +381,21 @@ table.text-center th{
     align-items: center;
     border-radius: 50%;
 }
+
+.fake-file-input{
+    width: 100%;
+    height: 155px;
+    border: 4px dashed #fff;
+    background-color: #0df9aa36;
+    display: flex !important;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.fake-file-input i{
+    font-size: 23px;
+    margin: 10px 0px 0px 0px;
+    color: #4caf50bd;
+}

@@ -93,7 +93,7 @@ class ExpensesController extends Controller
                 return redirect()->back()->with([
                     'success' => 'تم الدفع بنجاح',
                     'print_invoice' => true,
-                    'invoice_id' => $expenses->id
+                    'invoice_id' => $expenses->id,    
                 ]);
             }
 

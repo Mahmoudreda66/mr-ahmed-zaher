@@ -36,7 +36,9 @@ class StudentFactory extends Factory
             'mobile' => $phone,
             'gender' => rand(0, 1),
             'code' => $code,
-            'user_id' => 1
+            'user_id' => 1,
+            'edu_type' => rand(0, 1),
+            'division' => rand(0, 1)
         ];
     }
 }

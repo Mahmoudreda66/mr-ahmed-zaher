@@ -79,7 +79,7 @@
                     {{ method_field('delete') }}
                     <input type="hidden" name="id" id="id">
                     <div class="mb-2" style="font-size: 15px;">هل أنت متأكد من عملية الحذف؟ سيتم أرشفة بيانات الطالب لوقت لاحق</div>
-                    <div class="mb-3">
+                    <div class="mb-0">
                         <input type="text" id="student" class="form-control" readonly>
                     </div>
                 </form>
@@ -125,6 +125,7 @@
 <script>
     let oModal = document.getElementById('expensesModal'),
         oExpensesModal = new bootstrap.Modal(oModal);
+        
     oExpensesModal.show();
 </script>
 

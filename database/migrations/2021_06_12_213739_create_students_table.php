@@ -28,6 +28,7 @@ class CreateStudentsTable extends Migration
             $table->mediumInteger('given_money')->nullable();
             $table->string('code', 8)->unique();
             $table->foreignId('user_id')->constrained();
+            $table->softDeletes();
             $table->timestamps();
         });
 

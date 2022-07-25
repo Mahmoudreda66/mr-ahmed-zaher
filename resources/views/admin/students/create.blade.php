@@ -53,7 +53,7 @@
                 <div class="col-md-6 col-12 mb-3">
                     <div class="row">
                         <div class="col-4 mb-3">
-                            <label for="mobile" class="form-label">رقم الهاتف</label>
+                            <label for="mobile" class="form-label">رقم هاتف ولي الأمر</label>
                             <input type="number" value="{{ old('mobile') }}" name="mobile" placeholder="رقم الهاتف" id="mobile" class="form-control">
                             @error('mobile')
                             <small class="invalid-feedback d-block">{{ $message }}</small>

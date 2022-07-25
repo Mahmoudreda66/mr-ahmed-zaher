@@ -51,6 +51,11 @@ return [
             'provider' => 'students'
         ],
 
+        'videos' => [
+            'driver' => 'session',
+            'provider' => 'students'
+        ],
+
         'api' => [
             'driver' => 'token',
             'provider' => 'users',

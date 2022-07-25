@@ -21,6 +21,7 @@ use App\Http\Controllers\Admin\DatabaseController;
 use App\Http\Controllers\Admin\StatisticsController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\CertificateController;
+use App\Http\Controllers\Admin\VideoController;
 use App\Models\Admin\LessonsGroups;
 use Illuminate\Http\Request;
 use App\Models\Admin\Student;
@@ -87,6 +88,8 @@ Route::group(['prefix' => 'admin'], function () {
         Route::get('students/print-card/{id}', [StudentController::class, 'print_card']);
         Route::get('students/fill-absence-list', [StudentController::class, 'fill_absence_list'])->name('fill_absence_list');
         Route::get('students/filled-absence-list', [StudentController::class, 'filled_absence_list'])->name('filled_absence_list');
+        Route::get('students/confirm-application', [StudentController::class, 'confirm_application'])->name('confirm_application');
+        Route::post('students/update-confirm-application/{id}', [StudentController::class, 'update_confirm_application']);
         Route::resource('students', StudentController::class);
 
         // barcodes routes
@@ -292,6 +295,15 @@ Route::group(['prefix' => 'admin'], function () {
         // users routes
         Route::put('users/{id}/toggle-activity', [UserController::class, 'toggle_activity'])->name('users.toggle_activity');
         Route::resource('users', UserController::class);
+
+        // videos routes
+        Route::post('videos-management/upload', [VideoController::class, 'upload']);
+        Route::resource('videos-management', VideoController::class);
+
+        // extra routes
+        Route::get('math-equations', function () {
+            return view('admin.math_equations');
+        })->name('math-equations');
 
         // datatable route
         Route::get('dataTableTranslation', function () {

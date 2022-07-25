@@ -48,7 +48,9 @@ class AuthController extends Controller
     public function logout()
     {
         if (auth('parents')->check()) {
+            
             auth('parents')->logout();
+
             return redirect()->to(route('parents.login'));
         }
 

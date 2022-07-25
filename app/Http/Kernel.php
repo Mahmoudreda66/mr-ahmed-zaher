@@ -65,5 +65,6 @@ class Kernel extends HttpKernel
         'activeAdmin' => \App\Http\Middleware\ActiveAdmin::class,
         'examsAuth' => \App\Http\Middleware\ExamAuth::class,
         'parentsAuth' => \App\Http\Middleware\ParentsAuth::class,
+        'videosAuth' => \App\Http\Middleware\VideosAuth::class
     ];
 }

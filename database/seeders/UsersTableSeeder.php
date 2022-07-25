@@ -57,6 +57,10 @@ class UsersTableSeeder extends Seeder
                 'display_name' => 'كشف أسماء الطلاب',
                 'description' => 'طباعة كشف أسماء الطلاب'
             ],
+            'students-application-list' => [
+                'display_name' => 'قائمة حجوزات الطلاب',
+                'description' => 'صفحة تأكيد حجز الطلاب'
+            ],
             'students-absence-list' => [
                 'display_name' => 'كشف غياب الطلاب',
                 'description' => 'طباعة كشف غياب الطلاب'
@@ -88,6 +92,38 @@ class UsersTableSeeder extends Seeder
             'show-student' => [
                 'display_name' => 'عرض طالب',
                 'description' => 'عرض بيانات طالب معين'
+            ],
+            'videos' => [
+                'display_name' => 'قسم الفيديوهات',
+                'description' => 'عرض قسم الفيديوهات'
+            ],
+            'add-video' => [
+                'display_name' => 'إضافة فيديو',
+                'description' => 'إضافة فيديو'
+            ],
+            'edit-video' => [
+                'display_name' => 'تعديل فيديو',
+                'description' => 'تعديل فيديو'
+            ],
+            'delete-video' => [
+                'display_name' => 'حذف فيديو',
+                'description' => 'حذف فيديو'
+            ],
+            'videos' => [
+                'display_name' => '',
+                'description' => ''
+            ],
+            'videos' => [
+                'display_name' => '',
+                'description' => ''
+            ],
+            'videos' => [
+                'display_name' => '',
+                'description' => ''
+            ],
+            'videos' => [
+                'display_name' => '',
+                'description' => ''
             ],
             'money' => [
                 'display_name' => 'قسم الأموال',

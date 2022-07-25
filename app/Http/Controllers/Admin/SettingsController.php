@@ -45,6 +45,7 @@ class SettingsController extends Controller
             'expenses',
             'students_must_choose_teachers',
             'enable_students_online_application',
+            'must_confirm_students_application',
             'print_after_add_student',
             'center_phone1',
             'show_answers_after_exam_ends',

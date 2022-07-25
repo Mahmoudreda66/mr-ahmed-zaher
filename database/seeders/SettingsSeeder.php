@@ -70,5 +70,10 @@ class SettingsSeeder extends Seeder
             'name' => 'enable_students_online_application',
             'value' => 0
         ]);
+
+        Settings::create([
+            'name' => 'must_confirm_students_application',
+            'value' => 1
+        ]);
     }
 }

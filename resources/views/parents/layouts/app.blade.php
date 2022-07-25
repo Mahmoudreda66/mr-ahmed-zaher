@@ -9,6 +9,13 @@
 	<title>
 		@yield('title')
 	</title>
+	<meta name="description" content="أ/ محمد زاهر - مدرس الرياضيات للثانوية العامة">
+	<meta name="keywords" content="مدرس الرياضيات, محمد زاهر, محمد زاهر مدرس الرياضيات">
+	<meta property="og:url" content="https://mohamed-zaher.net" />
+	<meta property="og:type" content="website" />
+	<meta property="og:title" content="محمد زاهر | منصة أولياء الأمور" />
+	<meta property="og:description" content="أ/ محمد زاهر - مدرس الرياضيات للثانوية العامة" />
+	<meta property="og:image" content="{{ asset('dist/images/294836185_1476937809387257_7415150861878044543_n.jpg') }}" />
 	<meta name="_token" content="{{ csrf_token() }}">
 	<!--     Fonts and icons     -->
 	<link href="{{ asset('/material/css/fontawesome.css') }}" rel="stylesheet">

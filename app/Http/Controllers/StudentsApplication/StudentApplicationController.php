@@ -32,11 +32,16 @@ class StudentApplicationController extends Controller
         ->select('value')
         ->first()['value'];
 
+        $confirmationStatus = Settings::where('name', 'must_confirm_students_application')
+        ->select('value')
+        ->first()['value'];
+
         $centerPhoneNumber = Settings::where('name', 'center_phone1')
         ->select('value')
         ->first()['value'];
 
-        return view('studentsApplication.create', compact('levels', 'appliactionStatus', 'centerPhoneNumber'));
+        return view('studentsApplication.create',
+            compact('levels', 'appliactionStatus', 'centerPhoneNumber', 'confirmationStatus'));
     }
 
     /**

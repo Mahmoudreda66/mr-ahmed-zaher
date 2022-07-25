@@ -27,7 +27,7 @@ class CreateStudentsTable extends Migration
             $table->boolean('edu_type')->comment('0 is arabic, 1 is multilanguage');
             $table->mediumInteger('given_money')->nullable();
             $table->string('code', 8)->unique();
-            $table->foreignId('user_id')->constrained();
+            $table->foreignId('user_id')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

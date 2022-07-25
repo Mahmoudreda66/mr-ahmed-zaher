@@ -20,6 +20,11 @@
 
 @section('content')
 <div class="container mt-5">
+    @if(Session::has('error'))
+    <div class="alert alert-danger">
+        {{ Session::has('error') }}
+    </div>
+    @endif
 	<div class="bg-white p-3">
         @if(Session::has('open_modal'))
         <div class="modal fade" id="successModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -47,10 +52,9 @@
 
         @if($appliactionStatus != 0)
         <form
-        action="{{ route('studentsApplication.store', ['back_to' => 'students_application']) }}"
+        action="{{ route('studentsApplication.store') }}"
         method="post">
             @csrf
-            <input type="hidden" name="confirm" value="1">
             <div class="row mb-3">
                 <div class="col-md-6 col-12 mb-3 mb-md-0">
                     <label class="form-label" for="name" class="form-label">الإسم</label>

@@ -3,19 +3,10 @@
 namespace App\Http\Controllers\StudentsApplication;
 
 use App\Http\Controllers\Controller;
-use App\Models\Admin\Absence;
-use App\Models\Admin\Expenses;
-use App\Models\Admin\Level;
 use App\Models\Admin\Student;
-use App\Models\Admin\Subject;
 use App\Models\Admin\Settings;
-use App\Models\Admin\StudentTeachers;
-use App\Models\Exams\ExamsEnterAttemps;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Validator;
-use App\DataTables\StudentDataTable;
-use App\DataTables\StudentsConfirmationDataTable;
 
 class StudentApplication extends Controller
 {
@@ -53,10 +44,6 @@ class StudentApplication extends Controller
         $preps = [1, 2, 3];
         $secondaries = [4, 5, 6];
 
-        $students_must_choose_teachers = Settings::where('name', 'students_must_choose_teachers')
-            ->select('value')
-            ->first()['value'];
-
         $code = rand(10, 99) . rand(10, 99) . rand(10, 99) . rand(10, 99);
         $exists = Student::where('code', $code)->select('code')->first();
 
@@ -66,27 +53,13 @@ class StudentApplication extends Controller
 
         $deleted_at = null;
 
-        if($request->has('confirm')){
+        $confirmationStatus = Settings::where('name', 'must_confirm_students_application')->first()['value'];
+
+        if($confirmationStatus == 1){
             $deleted_at = now()->timestamp;
         }
 
         if (in_array($request->level, $preps)) { // prepratory student
-            if ($students_must_choose_teachers) {
-                $subjects = Subject::where('level', 0)->orWhere('level', 2)->get();
-
-                $subjects_teachers = [];
-
-                for ($i = 0; $i < count($subjects); $i++) {
-                    $subject = $request->toArray()[$subjects[$i]['name_en']] ?? null;
-
-                    if ($subject && $subject !== 'NULL') {
-                        $subjects_teachers[$subjects[$i]['name_en']] = $subject;
-                    }
-                }
-
-                unset($subjects_teachers['french']);
-                unset($subjects_teachers['germany']);
-            }
 
             $student = Student::create([
                 'name' => $request->name,
@@ -104,12 +77,6 @@ class StudentApplication extends Controller
                 'deleted_at' => $deleted_at
             ]);
 
-            if ($students_must_choose_teachers) {
-                StudentTeachers::create([
-                    'student_id' => $student->id,
-                    'teachers' => $subjects_teachers
-                ]);
-            }
         } else if (in_array($request->level, $secondaries)) { // secondary student
             if($request->level == 5 || $request->level == 6){
                 if($request->sub_language != "" && $request->division != ""){
@@ -136,30 +103,6 @@ class StudentApplication extends Controller
                 return redirect()->back()->withInput()->withErrors($smallValidation);
             }
 
-            if ($students_must_choose_teachers) {
-                if ($request->division !== null) {
-                    $subjects = Subject::where([['level', 1], ['division', $request->division]])->orWhere('level', 2)->get();
-                } else {
-                    $subjects = Subject::where('level', 1)->orWhere('level', 2)->orWhereNull('level')->get();
-                }
-
-                $subjects_teachers = [];
-
-                for ($i = 0; $i < count($subjects); $i++) {
-                    $subject = $request->toArray()[$subjects[$i]['name_en']] ?? null;
-
-                    if ($subject && $subject !== 'NULL') {
-                        $subjects_teachers[$subjects[$i]['name_en']] = $subject;
-                    }
-                }
-
-                if ($request->sub_language === '0') { // french
-                    unset($subjects_teachers['germany']);
-                } else { // germany
-                    unset($subjects_teachers['french']);
-                }
-            }
-
             $student = Student::create([
                 'name' => $request->name,
                 'level_id' => $request->level,
@@ -176,12 +119,6 @@ class StudentApplication extends Controller
                 'deleted_at' => $deleted_at
             ]);
 
-            if ($students_must_choose_teachers) {
-                StudentTeachers::create([
-                    'student_id' => $student->id,
-                    'teachers' => $subjects_teachers
-                ]);
-            }
         }
 
         if($request->has('back_to')){
@@ -201,13 +138,9 @@ class StudentApplication extends Controller
 
             }
         }else{
-            $print_after_add_student = Settings::where('name', 'print_after_add_student')->select('value')->first()['value'];
-
-            if ($print_after_add_student) {
-                return redirect()->back()->with(['success' => 'تم إضافة الطالب بنجاح', 'print' => $student->id]);
-            }
-
-            return redirect()->back()->with(['success' => 'تم إضافة الطالب بنجاح']);
+            return redirect()->back()->with([
+                'error' => 'طلب غير صالح'
+            ]);
         }
     }
 }
